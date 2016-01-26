@@ -1,0 +1,53 @@
+<script src="jquery.js"></script>
+<script src="jq-aajax.js"></script>
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript">
+
+	jQuery(document).on("change","#file2",function(){
+		
+               var reader = new FileReader();
+
+        
+      
+      // console.log(this.files[0].__proto__.__proto__);
+        var img = document.createElement("img");
+    img.classList.add("obj");
+    img.file = this.files[0];
+   jQuery("#div").append(img);
+
+   reader.readAsDataURL(this.files[0]);
+    //console.log(window.URL.createObjectURL(this.files[0]));
+    reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+
+
+    reader.onload = function(evt) {
+    console.log(evt.target.result);
+  };
+  reader.readAsBinaryString(this.files[0]);
+
+});
+
+	jQuery(document).ready(function(){
+      jQuery("#file22").aAjax({appendTo:"#div",url:"http://localhost/jq/test.php",allowed:"jpg,png",maxSize:2});
+	})
+
+
+
+	
+
+
+</script>
+</head>
+<body>
+
+<input type="file" id="file22" name="file22">
+<div id="div">
+	
+</div>
+
+
+</body>
+
